@@ -10,6 +10,10 @@ donner à l'app cette adresse dans les champs **Website** du menu **Settings**. 
 CORS bien sur et donc on peut développer en local en donnant à un des deux champs la valeur suivante : 
 **http://localhost**
 
+#Ressources communes au Back-End et Front-End
+* [Graph API nodes and edges](https://developers.facebook.com/docs/graph-api/reference/)
+* [How to use Graph API](https://developers.facebook.com/docs/graph-api/using-graph-api/v2.2)
+
 #Back-End
 Normalement quand on passe par le back-end c'est parce qu'on veut pas que ce soit un user qui soit loggé 
 dans notre application. Comme on veut que ce soit le site web qui y soit, il faut se logger en tant qu'app.

@@ -33,10 +33,22 @@
 	$response = $request->execute();
 	$page_photos = $response->getGraphObject()->asArray()['data'];
 
+	// Doesn't work. Will need to fix this
+	/*function getSomethingFromFacebook($node, $edges){
+		$path = '/' . $node . '/' . $edges;
 
-	function getSomethingFromFacebook(){
-		
+		$request = new FacebookRequest(
+			$session,
+			'GET',
+			$path
+		);
+		$response = $request->execute();
+		$result = $response->getGraphObject()->asArray()['data'];
+
+		return $result;
 	}
+
+	$page_photos = getSomethingFromFacebook('1479576005652192', 'photos/uploaded');/**/
 ?>
 <!DOCTYPE html>
 <html lang="en">
