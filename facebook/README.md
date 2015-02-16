@@ -1,4 +1,5 @@
 ######Valide en date du 13 février 2015 jusqu'en octobre 2017
+![Header La Grange](http://clients.la-grange.ca/grange/grange_header.jpg "Header La Grange")
 
 ###Documentation sur l'utilisation du feed Facebook.
 Pour pouvoir utiliser le feed Facebook, il faudra utiliser une app. Pour cela,
