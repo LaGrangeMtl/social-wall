@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Facebook Login JavaScript Example</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		</head>
+	<body>
+		<script>
+			function statusChangeCallback(response) {
+				console.log('statusChangeCallback');
+				console.log(response);
+				if (response.status === 'connected') {
+					testAPI();
+				} else if (response.status === 'not_authorized') {
+					document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+				} else {
+					document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+				}
+			}
+
+			function checkLoginState() {
+				FB.getLoginStatus(function(response) {
+					statusChangeCallback(response);
+				});
+			}
+
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId      : '570240956445444',
+					cookie     : true,
+					xfbml      : true,
+					version    : 'v2.1'
+				});
+
+				testAPI();
+				FB.getLoginStatus(function(response) {
+					statusChangeCallback(response);
+				});/**/
+			};
+
+			// Load the SDK asynchronously
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+
+			// Here we run a very simple test of the Graph API after login is
+			// successful.  See statusChangeCallback() for when this call is made.
+			function testAPI() {
+
+				var shareBtn = document.getElementById("share-btn");
+				var loginBtn = document.getElementById("login-btn");
+
+				document.querySelector(".row.login").style.display = "none";
+				document.querySelector(".row.logged-in").style.display = "block";
+
+				shareBtn.onclick = function(e){
+					e.preventDefault();
+					FB.api(
+						'/1479576005652192/photos/uploaded',
+						function(response){
+							console.table(response);
+						}
+					);
+				}
+			}
+		</script>
+
+		<div class="container">
+			<div class="row login">
+				<div class="col-md-6 col-md-offset-3 well">
+					<h2>Concours Login</h2>
+
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					<br>
+					<br>
+					<fb:login-button id="login-btn" scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+				</div>
+			</div>
+			<div class="row logged-in" style="display:none;">
+				<div class="col-md-6 col-md-offset-3 well">
+					<h2>Concours Share</h2>
+
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non deserunt, veritatis explicabo ipsam ab at ut a aliquam odit error beatae facilis minus distinctio eligendi, suscipit maxime dolorum cupiditate, fugiat nostrum necessitatibus. Quo optio itaque iusto, saepe blanditiis quidem accusantium sunt cum. Nesciunt ratione eius suscipit tenetur porro quas dolore.
+					<br>
+					<br>
+					<button id="share-btn" class="btn btn-primary btn-lg btn-block">Partager !</button>
+
+					<div id="response">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="fb-root"></div>
+
+	</body>
+</html>
