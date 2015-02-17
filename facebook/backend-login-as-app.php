@@ -1,11 +1,10 @@
 <?php
-	error_reporting(E_ALL);
 	require('modules/facebook/autoload.php');
 	use Facebook\FacebookSession;
 	use Facebook\FacebookRequest;
 	
 	// Set up l'applicaiton
-	FacebookSession::setDefaultApplication('570240956445444', 'ef9464fd6920eaedbd49ac96f90abc50');
+	FacebookSession::setDefaultApplication('APP_ID', 'APP_SECRET');
 
 	// If you already have a valid access token:
 	$session = new FacebookSession('access-token');
@@ -28,27 +27,10 @@
 	$request = new FacebookRequest(
 		$session,
 		'GET',
-		'/1479576005652192/photos/uploaded'
+		'/PAGE_OR_USER_ID/photos/uploaded'
 	);
 	$response = $request->execute();
 	$page_photos = $response->getGraphObject()->asArray()['data'];
-
-	// Doesn't work. Will need to fix this
-	/*function getSomethingFromFacebook($node, $edges){
-		$path = '/' . $node . '/' . $edges;
-
-		$request = new FacebookRequest(
-			$session,
-			'GET',
-			$path
-		);
-		$response = $request->execute();
-		$result = $response->getGraphObject()->asArray()['data'];
-
-		return $result;
-	}
-
-	$page_photos = getSomethingFromFacebook('1479576005652192', 'photos/uploaded');/**/
 ?>
 <!DOCTYPE html>
 <html lang="en">
