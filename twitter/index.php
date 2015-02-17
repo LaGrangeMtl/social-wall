@@ -12,10 +12,10 @@
 
 			/** Set access tokens here - see: https://dev.twitter.com/apps/ **/
 			$settings = array(
-			    'oauth_access_token' => "361605925-DWTgPvy3oUWs3vxh0Hxe6WIvF1IOr7xxqLYgPfNp",
-			    'oauth_access_token_secret' => "Pl4EaymO8LqKz0wt0nHWJ2phHQiI1LUquu2gMsUhI80cE",
-			    'consumer_key' => "7HQco3Slead7bl08BcO1z2tda",
-			    'consumer_secret' => "qXVT8aSZXJsFTLdfN4jhO57AdjXPUhQRH0CfYLo5W9sTs3xUpD"
+			    'oauth_access_token' => "YOUR_ACCESS_TOKEN",
+			    'oauth_access_token_secret' => "YOUR_ACCESS_TOKEN_SECRET",
+			    'consumer_key' => "YOUR_CONSUMER_KEY",
+			    'consumer_secret' => "YOUR_CONSUMER_SECRET"
 			);
 
 			/** URL for REST request, see: https://dev.twitter.com/docs/api/1.1/ **/

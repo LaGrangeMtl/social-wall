@@ -30,13 +30,39 @@ pour communiquer avec leurs serveurs dont une qui selon mes recherches a de bonn
 l'API v1.1 de Twitter : [twitter-api-php](https://github.com/J7mbo/twitter-api-php). Le fonctionnement est bien 
 expliqué dans le README ou encore sur [stackoverflow](http://stackoverflow.com/questions/12916539/simplest-php-example-for-retrieving-user-timeline-with-twitter-api-version-1-1/15314662#15314662).
 
-Voici donc un exemple simple pour GET une ressource : 
+Voici donc un exemple simple pour **GET** une ressource :
 
+`````php
+//On require la librairie et on ajuste les settings pour fitter notre app
+require_once('modules/TwitterAPIExchange.php');
 
-Il y a un exemple fonctionnel dans [index.php](index.php). Il est important de noter que **pour que les requêtes
-fonctionnent en local**, il faut **désactiver SSL** car nos serveurs WAMP/XAMPP/etc. n'ont pas de certificats. 
-Pour ce faire, dans la librairie TwitterAPIExchange, il faut setter **CURLOPT_SSL_VERIFYPEER => false** dans la
-fonction performRequest :
+/** Set access tokens here - see: https://dev.twitter.com/apps/ **/
+$settings = array(
+    'oauth_access_token' => "YOUR_ACCESS_TOKEN",
+    'oauth_access_token_secret' => "YOUR_ACCESS_TOKEN_SECRET",
+    'consumer_key' => "YOUR_CONSUMER_KEY",
+    'consumer_secret' => "YOUR_CONSUMER_SECRET"
+);
+`````
+Ensuite on détermine quelle ressource on veut. Voici la [liste](https://dev.twitter.com/rest/public) des ressources 
+disponibles et de leurs options. Ici on veut la timeline d'un certain utilisateur. Les options sont passés dans la
+variable $getfield.
+````````php
+$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+$requestMethod = 'GET';
+$getfield = '?screen_name=lagrange_mtl';
+$twitter = new TwitterAPIExchange($settings);
+````````
+
+Il ne reste plus qu'à passer passer la requête et la décoder (elle est retournée en JSON, on pourrait donc la passer à du Javascript directement)
+`````php
+$twitter->setGetfield($getfield);
+$twitter->buildOauth($url, $requestMethod);
+$response = json_decode($twitter->performRequest());
+`````
+Il est important de noter que **pour que les requêtes fonctionnent en local**, il faut **désactiver SSL** car nos 
+serveurs WAMP/XAMPP/etc. n'ont pas de certificats. Pour ce faire, dans la librairie TwitterAPIExchange, il faut setter 
+**CURLOPT_SSL_VERIFYPEER => false** dans la fonction performRequest :
 ```````php
 public function performRequest($return = true){
         if (!is_bool($return)) 
@@ -59,3 +85,5 @@ public function performRequest($return = true){
         );
 ```````
 **ATTENTION** : il faut bien entendu la remettre à true lorsqu'on tombe en prod
+
+Il y a un exemple fonctionnel dans [index.php](index.php). 
