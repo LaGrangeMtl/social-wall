@@ -16,10 +16,10 @@
 			$GClient->setApplicationName("YOUR_APP_NAME");
 			$GClient->setDeveloperKey($api_key);
 
-			$service = new Google_Service_Youtube($GClient);
+			$youtubeAPI = new Google_youtubeAPI_Youtube($GClient);
 
 			$channelPlaylistsParams = array('channelId'=>'SOME_CHANNEL_ID');
-			$channelPlaylists = $service->playlists->listPlaylists('snippet,contentDetails', $channelPlaylistsParams);
+			$channelPlaylists = $youtubeAPI->playlists->listPlaylists('snippet,contentDetails', $channelPlaylistsParams);
 
 			// Mettons qu'on veut avoir juste une "playlist" d'un channel
 			$playlist_id = $channelPlaylists[0]->id;
@@ -30,7 +30,7 @@
 
 			// Mettons que je veux les vidéos de la playlist
 			$videoListParams = array('playlistId'=>$playlist_id);
-			$videoListFromThatPlaylist = $service->playlistItems->listPlaylistItems('snippet,contentDetails', $videoListParams);
+			$videoListFromThatPlaylist = $youtubeAPI->playlistItems->listPlaylistItems('snippet,contentDetails', $videoListParams);
 
 			// YEAH BOI. Ça a pris toute ça, mais on l'a eu.
 			echo "<hr/><br/>La liste des vidéos ça d'l'air de d'ça";
