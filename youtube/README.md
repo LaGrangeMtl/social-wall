@@ -57,7 +57,18 @@ $videoListParams = array('playlistId'=>$playlist_id);
 $videoListFromThatPlaylist = $youtubeAPI->playlistItems->listPlaylistItems('snippet,contentDetails', $videoListParams);
 ````````
 
+Alternativement, on peut retriever une liste de vidéos d'un channel par le Search, avec le paramètre channelId. 
+````````php
+$searchResponse = $youtubeAPI->search->listSearch('id,snippet', array(
+	'channelId' => self::$channelId,
+	'maxResults' => $n,
+	'order' => 'date'
+));
+````````
+
 Et puis pour avoir accès aux détails des vidéos :
 ```````php
 var_dump($videoListFromThatPlaylist['modelData']['items']);
 ``````
+
+
