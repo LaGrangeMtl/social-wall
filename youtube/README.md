@@ -71,4 +71,7 @@ Et puis pour avoir accès aux détails des vidéos :
 var_dump($videoListFromThatPlaylist['modelData']['items']);
 ``````
 
+#Option pour requests publics
+
+Pour les requests à l'API youtube simples ne nécéssitant pas OAuth, la librairie suivante est la meilleure option : [https://github.com/madcoda/php-youtube-api](https://github.com/madcoda/php-youtube-api)
 
